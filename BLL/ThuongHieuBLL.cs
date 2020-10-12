@@ -7,7 +7,7 @@ using Model;
 
 namespace BLL
 {
-    public class ThuongHieuBLL : IThuogHieuBLL
+    public class ThuongHieuBLL : IThuongHieuBLL
     {
         private IThuongHieuDAL ithuonghieu;
         public ThuongHieuBLL(IThuongHieuDAL ithuonghieu2)

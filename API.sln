@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{6434B05B-4B6A-47C5-8CFB-D16EFD9A9B75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{6434B05B-4B6A-47C5-8CFB-D16EFD9A9B75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{A86A1F35-BC4B-4313-830A-416A401D2143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{A86A1F35-BC4B-4313-830A-416A401D2143}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A53AEE43-ED16-4E5D-A2C3-80ED62DEE0E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{A53AEE43-ED16-4E5D-A2C3-80ED62DEE0E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{5A77F216-FCAF-43AA-A8C6-C9C10FE16061}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{B14AFD20-C0CA-4D78-B9D4-0715AB81B228}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{A53AEE43-ED16-4E5D-A2C3-80ED62DEE0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A53AEE43-ED16-4E5D-A2C3-80ED62DEE0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A53AEE43-ED16-4E5D-A2C3-80ED62DEE0E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A77F216-FCAF-43AA-A8C6-C9C10FE16061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A77F216-FCAF-43AA-A8C6-C9C10FE16061}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A77F216-FCAF-43AA-A8C6-C9C10FE16061}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A77F216-FCAF-43AA-A8C6-C9C10FE16061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B14AFD20-C0CA-4D78-B9D4-0715AB81B228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B14AFD20-C0CA-4D78-B9D4-0715AB81B228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B14AFD20-C0CA-4D78-B9D4-0715AB81B228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B14AFD20-C0CA-4D78-B9D4-0715AB81B228}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

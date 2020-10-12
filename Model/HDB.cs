@@ -8,7 +8,7 @@ namespace Model
     {
         public string MaHDB { get; set; }
         public string MaKH { get; set; }
-        public string NgayBan { get; set; }
+        public DateTime NgayBan { get; set; }
         public string PTTT { get; set; }
         public int TongTien { get; set; }
         public string TrangThai { get; set; }

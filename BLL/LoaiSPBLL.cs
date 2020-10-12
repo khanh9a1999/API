@@ -7,7 +7,7 @@ using Model;
 
 namespace BLL
 {
-    public class LoaiSPBll : IloaiSPBLL
+    public class LoaiSPBll : ILoaiSPBLL
     {
         private ILoaiSPDAL iloaisp;
         public LoaiSPBll(ILoaiSPDAL iloaisp2)

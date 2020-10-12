@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL.Interfaces
+namespace BLL.Interfaces
 {
-    public partial interface ISanPhamDAL
+    public partial interface ISanPhamBLL
     {
         bool Create(SanPham model);
         SanPham GetDatabyID(string id);

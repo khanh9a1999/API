@@ -5,8 +5,8 @@ using System.Text;
 
 namespace BLL.Interfaces
 {
-   public interface ILoaiSPBLL
+    public interface IThuongHieuBLL
     {
-        List<LoaiSP> getall();
+        List<ThuongHieu> getall();
     }
 }

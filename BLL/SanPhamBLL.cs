@@ -7,16 +7,29 @@ using Model;
 
 namespace BLL
 {
-   public class SanPhamBLL:ISanPhamBLL
+    public class SanPhamBLL : ISanPhamBLL
     {
-        private ISanPhamDAL isanpham;
-        public SanPhamBLL(ISanPhamDAL isanpham2)
+        private ISanPhamDAL _res;
+        public SanPhamBLL(ISanPhamDAL LoaiSPRes)
         {
-            isanpham = isanpham2;
+            _res = LoaiSPRes;
         }
-        public List<SanPham> getall()
+        public bool Create(SanPham model)
         {
-            return isanpham.GetData();
+            return _res.Create(model);
+        }
+        public SanPham GetDatabyID(string id)
+        {
+            return _res.GetDatabyID(id);
+        }
+        public List<SanPham> GetDataAll()
+        {
+            return _res.GetDataAll();
+        }
+        public List<SanPham> Search(int pageIndex, int pageSize, out long total, string MaLoai)
+        {
+            return _res.Search(pageIndex, pageSize, out total, MaLoai);
         }
     }
+
 }
