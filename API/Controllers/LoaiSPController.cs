@@ -20,7 +20,7 @@ namespace API.Controllers
             iloaispb = iloaispb2;
         }
         // GET: api/<LoaiController>
-        [Route("all")]
+        [Route("loaisp-all")]
         [HttpGet]
         public IEnumerable<LoaiSP> Get()
         {

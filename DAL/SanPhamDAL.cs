@@ -27,7 +27,7 @@ namespace DAL
                 "@MaThuongHieu", model.MaThuongHieu,
                 "@TenSP", model.TenSP,
                 "@XuatXu", model.XuatXu,
-                "@MoTa", model.Mota,
+                "@MoTa", model.MoTa,
                 "@DonGia", model.DonGia,
                 "@SoLuong", model.SoLuong,
                 "@Anh", model.Anh
@@ -87,6 +87,22 @@ namespace DAL
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPham>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<SanPham> GetDataByLoai(string MaLoai)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_by_loai",
+                     "@MaLoai", MaLoai);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
                 return dt.ConvertTo<SanPham>().ToList();
             }
             catch (Exception ex)

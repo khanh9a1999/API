@@ -9,7 +9,7 @@ namespace Model
         public string MaSP { get; set; }
         public string TenSP { get; set; }
         public string XuatXu { get; set; }
-        public string Mota { get; set; }
+        public string MoTa { get; set; }
         public int DonGia { get; set; }
         public int SoLuong { get; set; }
         public string Anh { get; set; }

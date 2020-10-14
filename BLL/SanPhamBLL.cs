@@ -22,6 +22,10 @@ namespace BLL
         {
             return _res.GetDatabyID(id);
         }
+        public List<SanPham> GetDataByLoai(string id)
+        {
+            return _res.GetDataByLoai(id);
+        }
         public List<SanPham> GetDataAll()
         {
             return _res.GetDataAll();

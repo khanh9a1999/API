@@ -42,6 +42,12 @@ namespace API.Controllers
         {
             return ispb.GetDatabyID(id);
         }
+        [Route("sp-get-by-loai/{id}")]
+        [HttpGet]
+        public List<SanPham> GetDataByLoai(string id)
+        {
+            return ispb.GetDataByLoai(id);
+        }
 
         // PUT api/<SanPhamController>/5
         [HttpPut("{id}")]

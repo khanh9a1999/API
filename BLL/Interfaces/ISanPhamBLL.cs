@@ -10,6 +10,7 @@ namespace BLL.Interfaces
         bool Create(SanPham model);
         SanPham GetDatabyID(string id);
         List<SanPham> GetDataAll();
+        List<SanPham> GetDataByLoai(string id);
         List<SanPham> Search(int pageIndex, int pageSize, out long total, string MaLoai);
     }
 }
