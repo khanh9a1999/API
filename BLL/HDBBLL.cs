@@ -14,9 +14,10 @@ namespace BLL
         {
             ihdb = ihdb2;
         }
-        public List<HDB> getall()
+        public bool Create(HDB model)
         {
-            return ihdb.GetData();
+            return ihdb.Create(model);
         }
     }
+
 }

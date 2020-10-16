@@ -5,8 +5,8 @@ using System.Text;
 
 namespace DAL.Interfaces
 {
-   public interface IHDBDAL
+   public partial interface IHDBDAL
     {
-        public List<HDB> GetData();
+        bool Create(HDB model);
     }
 }

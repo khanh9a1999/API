@@ -5,8 +5,9 @@ using System.Text;
 
 namespace BLL.Interfaces
 {
-    public interface IHDBBLL
+    public partial interface IHDBBLL
     {
-        List<HDB> getall();
+        
+        bool Create(HDB model);
     }
 }

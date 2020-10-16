@@ -12,5 +12,6 @@ namespace Model
         public string PTTT { get; set; }
         public int TongTien { get; set; }
         public string TrangThai { get; set; }
+        public List<CTHDB> listjson_chitiet { get; set; }
     }
 }

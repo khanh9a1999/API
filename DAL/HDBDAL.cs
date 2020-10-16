@@ -16,15 +16,24 @@ namespace DAL
             _dbHelper = dbHelper;
         }
 
-        public List<HDB> GetData()
+        public bool Create(HDB model)
         {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "hdb_get_data");
-                if (!string.IsNullOrEmpty(msgError))
-                    throw new Exception(msgError);
-                return dt.ConvertTo<HDB>().ToList();
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "hoa_don_create",
+                "@MaHDB", model.MaHDB,
+                "@MaKH", model.MaKH,
+                "@NgayBan", model.NgayBan,
+                "@PTTT", model.PTTT,
+                "@TongTien", model.TongTien,
+                "@TrangThai", model.TrangThai,
+                "@listjson_chitiet", model.listjson_chitiet != null ? MessageConvert.SerializeObject(model.listjson_chitiet) : null);
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(Convert.ToString(result) + msgError);
+                }
+                return true;
             }
             catch (Exception ex)
             {

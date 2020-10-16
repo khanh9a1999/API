@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,36 +14,24 @@ namespace API.Controllers
     [ApiController]
     public class HDBController : ControllerBase
     {
-        // GET: api/<HDBController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private IHDBBLL ihdb;
+        public HDBController(IHDBBLL ihdb2)
         {
-            return new string[] { "value1", "value2" };
+            ihdb = ihdb2;
         }
 
-        // GET api/<HDBController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<HDBController>
+        [Route("create-hdb")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public HDB CreateItem([FromBody] HDB model)
         {
-        }
-
-        // PUT api/<HDBController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<HDBController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            model.MaHDB = Guid.NewGuid().ToString();
+            if (model.listjson_chitiet != null)
+            {
+                foreach (var item in model.listjson_chitiet)
+                    item.MaHDB = Guid.NewGuid().ToString();
+            }
+            ihdb.Create(model);
+            return model;
         }
     }
 }
