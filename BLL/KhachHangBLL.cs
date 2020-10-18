@@ -7,16 +7,16 @@ using Model;
 
 namespace BLL
 {
-   public class KhachHangBLL:IKhachHangBLL
+   public class KhachHangBLL:IKhacHangBLL
     {
         private IKhachHangDAL ikhachhang;
         public KhachHangBLL (IKhachHangDAL ikhachhang2)
         {
             ikhachhang = ikhachhang2;
         }
-        public List<KhachHang> getall()
+        public bool Create(KhachHang model)
         {
-            return ikhachhang.GetData();
+            return ikhachhang.Create(model);
         }
     }
 }

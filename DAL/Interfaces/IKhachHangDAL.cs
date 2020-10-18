@@ -5,8 +5,8 @@ using System.Text;
 
 namespace DAL.Interfaces
 {
-    public interface IKhachHangDAL
+    public partial interface IKhachHangDAL
     {
-        public List<KhachHang> GetData();
+        bool Create(KhachHang model);
     }
 }

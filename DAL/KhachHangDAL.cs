@@ -16,15 +16,24 @@ namespace DAL
             _dbHelper = dbHelper;
         }
 
-        public List<KhachHang> GetData()
+        public bool Create(KhachHang model)
         {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "khachhang_get_data");
-                if (!string.IsNullOrEmpty(msgError))
-                    throw new Exception(msgError);
-                return dt.ConvertTo<KhachHang>().ToList();
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "khachhang_create",
+                "@MaKH", model.MaKH,
+                "@TenKH", model.TenKH,
+                "@DiaChi", model.DiaChi,
+                "@SĐT", model.SDT,
+                "@Email", model.Email,
+                "@PW", model.PW);
+
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(Convert.ToString(result) + msgError);
+                }
+                return true;
             }
             catch (Exception ex)
             {
@@ -33,3 +42,4 @@ namespace DAL
         }
     }
 }
+

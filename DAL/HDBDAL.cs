@@ -24,6 +24,7 @@ namespace DAL
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "hoa_don_create",
                 "@MaHDB", model.MaHDB,
                 "@MaKH", model.MaKH,
+                "@TenKH", model.TenKH,
                 "@NgayBan", model.NgayBan,
                 "@PTTT", model.PTTT,
                 "@TongTien", model.TongTien,

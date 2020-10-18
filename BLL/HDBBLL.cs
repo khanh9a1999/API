@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BLL
 {
-   public class HDBBLL:IHDBBLL
+   public partial class HDBBLL:IHDBBLL
     {
         private IHDBDAL ihdb;
         public HDBBLL (IHDBDAL ihdb2)
