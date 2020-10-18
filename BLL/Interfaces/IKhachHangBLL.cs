@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BLL.Interfaces
 {
-    public partial interface IKhacHangBLL
+    public partial interface IKhachHangBLL
     {
         bool Create(KhachHang model);
     }

@@ -73,7 +73,7 @@ namespace API.Controllers
                 if (formData.Keys.Contains("item_group_id") && !string.IsNullOrEmpty(Convert.ToString(formData["item_group_id"]))) { item_group_id = Convert.ToString(formData["item_group_id"]); }
                 long total = 0;
                 var data = ispb.Search(page, pageSize, out total, item_group_id);
-                response.TotalSachs = total;
+                response.TotalItems = total;
                 response.Data = data;
                 response.Page = page;
                 response.PageSize = pageSize;

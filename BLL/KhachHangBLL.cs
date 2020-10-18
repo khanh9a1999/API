@@ -7,7 +7,7 @@ using Model;
 
 namespace BLL
 {
-   public class KhachHangBLL:IKhacHangBLL
+   public class KhachHangBLL:IKhachHangBLL
     {
         private IKhachHangDAL ikhachhang;
         public KhachHangBLL (IKhachHangDAL ikhachhang2)

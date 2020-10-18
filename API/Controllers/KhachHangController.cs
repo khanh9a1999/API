@@ -14,8 +14,8 @@ namespace API.Controllers
     [ApiController]
     public class KhachHangController : ControllerBase
     {
-        private IKhacHangBLL ikhbll;
-        public KhachHangController(IKhacHangBLL ikhbll2)
+        private IKhachHangBLL ikhbll;
+        public KhachHangController(IKhachHangBLL ikhbll2)
         {
             ikhbll = ikhbll2;
         }
