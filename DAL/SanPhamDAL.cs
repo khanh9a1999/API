@@ -43,6 +43,53 @@ namespace DAL
                 throw ex;
             }
         }
+        
+
+        public bool Delete(string id)
+        {
+            string msgError = "";
+            try
+            {
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_product_delete",
+                "@MaSP", id);
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(Convert.ToString(result) + msgError);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool Update(SanPham model)
+        {
+            string msgError = "";
+            try
+            {
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_product_update",
+                "@MaSP", model.MaSP,
+                "@MaLoai", model.MaLoai,
+                "@MaThuongHieu", model.MaThuongHieu,
+                "@TenSP", model.TenSP,
+                "@XuatXu", model.XuatXu,
+                "@MoTa", model.MoTa,
+                "@DonGia", model.DonGia,
+                "@SoLuong", model.SoLuong,
+                "@Anh", model.Anh);
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(Convert.ToString(result) + msgError);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public SanPham GetDatabyID(string id)
         {
             string msgError = "";
@@ -110,6 +157,28 @@ namespace DAL
                 throw ex;
             }
         }
+        public List<SanPham> TK(int pageIndex, int pageSize, out long total, string TenSP, decimal DonGia)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_product_tk",
+                    "@page_index", pageIndex,
+                    "@page_size", pageSize,
+                    "@TenSP", TenSP,
+                    "@DonGia", DonGia);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPham>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
 

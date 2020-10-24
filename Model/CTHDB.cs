@@ -4,12 +4,11 @@ using System.Text;
 
 namespace Model
 {
-   public class CTHDB
-    {
-        public string MaHDB { get; set; }
-        public string MaSP { get; set; }
-        public string TenSP { get; set; }
-        public string SoLuong { get; set; }
-        public string DonGia { get; set; }
-    }
+	public class CTHDB
+	{
+		public string ma_chi_tiet { get; set; }
+		public string ma_hoa_don { get; set; }
+		public string MaSP { get; set; }
+		public int so_luong { get; set; }
+	}
 }

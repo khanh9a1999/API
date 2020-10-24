@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BLL.Interfaces
+namespace BLL
 {
     public partial interface IHDBBLL
     {
-        
         bool Create(HDB model);
     }
 }

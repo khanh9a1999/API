@@ -34,6 +34,18 @@ namespace BLL
         {
             return _res.Search(pageIndex, pageSize, out total, MaLoai);
         }
+        public bool Delete(string id)
+        {
+            return _res.Delete(id);
+        }
+        public bool Update(SanPham model)
+        {
+            return _res.Update(model);
+        }
+        public List<SanPham> TK(int pageIndex, int pageSize, out long total, string TenSP, decimal DonGia)
+        {
+            return _res.TK(pageIndex, pageSize, out total, TenSP, DonGia);
+        }
     }
 
 }

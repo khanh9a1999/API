@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using BLL;
 using BLL.Interfaces;
 using DAL;
@@ -11,12 +7,8 @@ using DAL.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API
@@ -38,10 +30,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddCors(options => {
-                options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            });
+            services.AddCors();
             services.AddControllers();
 
             // configure strongly typed settings objects
@@ -68,18 +57,13 @@ namespace API
                     ValidateAudience = false
                 };
             });
+
             services.AddControllers();
-            services.AddTransient<ICTHDNBLL, CTHDNBLL>();
-            services.AddTransient<ICTHDNDAL, CTHDNDAL>();
-            services.AddTransient<ICTHDBBLL, CTHDBBLL>();
-            services.AddTransient<ICTHDBDAL, CTHDBDAL>();
             services.AddTransient<IHDBDAL, HDBDAL>();
             services.AddTransient<IHDBBLL, HDBBLL>();
             services.AddTransient<IKhachHangBLL, KhachHangBLL>();
             services.AddTransient<IKhachHangDAL, KhachHangDAL>();
             services.AddTransient<ILoaiSPDAL, LoaiSPDAL>();
-            services.AddTransient<INCCDAL, NCCDAL>();
-            services.AddTransient<INCCBLL, NCCBLL>();
             services.AddTransient<IThuongHieuDAL, ThuongHieuDAL>();
             services.AddTransient<IThuongHieuBLL, ThuongHieuBLL>();
             services.AddTransient<IUserDAL, UserDAL>();
@@ -94,17 +78,13 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            app.UseCors(options =>
-            options.WithOrigins("http://localhost:4200").AllowAnyMethod()
-            .AllowAnyHeader());
-
-            app.UseHttpsRedirection();
-
             app.UseRouting();
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
             app.UseAuthentication();
             app.UseAuthorization();
 

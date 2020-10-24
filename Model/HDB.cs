@@ -4,15 +4,13 @@ using System.Text;
 
 namespace Model
 {
-    public class HDB
-    {
-        public string MaHDB { get; set; }
-        public string MaKH { get; set; }
-        public string TenKH { get; set; }
-        public DateTime NgayBan { get; set; }
-        public string PTTT { get; set; }
-        public int TongTien { get; set; }
-        public string TrangThai { get; set; }
-        public List<CTHDB> listjson_chitiet { get; set; }
-    }
+	public class HDB
+	{
+		public string ma_hoa_don { get; set; }
+		public string ho_ten { get; set; }
+		public string dia_chi { get; set; }
+		public string sdt { get; set; }
+		public int order_total { get; set; }
+		public List<CTHDB> listjson_chitiet { get; set; }
+	}
 }

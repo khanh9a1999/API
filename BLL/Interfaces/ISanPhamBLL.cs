@@ -12,5 +12,8 @@ namespace BLL.Interfaces
         List<SanPham> GetDataAll();
         List<SanPham> GetDataByLoai(string id);
         List<SanPham> Search(int pageIndex, int pageSize, out long total, string MaLoai);
+        bool Update(SanPham model);
+        bool Delete(string id);
+        List<SanPham> TK(int pageIndex, int pageSize, out long total, string TenSP, decimal DonGia);
     }
 }

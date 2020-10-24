@@ -1,16 +1,12 @@
 ﻿using DAL.Helper;
-using DAL.Interfaces;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DAL
 {
-    public class HDBDAL : IHDBDAL
+    public partial class HDBDAL : IHDBDAL
     {
-
-        public IDatabaseHelper _dbHelper;
+        private IDatabaseHelper _dbHelper;
         public HDBDAL(IDatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper;
@@ -21,14 +17,12 @@ namespace DAL
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "hoa_don_create",
-                "@MaHDB", model.MaHDB,
-                "@MaKH", model.MaKH,
-                "@TenKH", model.TenKH,
-                "@NgayBan", model.NgayBan,
-                "@PTTT", model.PTTT,
-                "@TongTien", model.TongTien,
-                "@TrangThai", model.TrangThai,
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_hoa_don_create",
+                "@ma_hoa_don", model.ma_hoa_don,
+                "@ho_ten", model.ho_ten,
+                "@dia_chi", model.dia_chi,
+                "@sdt", model.sdt,
+                "@order_total", model.order_total,
                 "@listjson_chitiet", model.listjson_chitiet != null ? MessageConvert.SerializeObject(model.listjson_chitiet) : null);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
@@ -42,4 +36,5 @@ namespace DAL
             }
         }
     }
+    
 }

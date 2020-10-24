@@ -1,22 +1,22 @@
-﻿using BLL.Interfaces;
-using DAL.Interfaces;
+﻿using DAL;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BLL
 {
-   public partial class HDBBLL:IHDBBLL
+    public partial class HDBBLL : IHDBBLL
     {
-        private IHDBDAL ihdb;
-        public HDBBLL (IHDBDAL ihdb2)
+        private IHDBDAL _res;
+        public HDBBLL(IHDBDAL res)
         {
-            ihdb = ihdb2;
+            _res = res;
         }
         public bool Create(HDB model)
         {
-            return ihdb.Create(model);
+            return _res.Create(model);
         }
     }
 

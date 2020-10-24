@@ -1,13 +1,16 @@
-﻿using BLL.Interfaces;
-using DAL.Interfaces;
-using Microsoft.Extensions.Configuration;
+﻿using DAL;
 using Microsoft.IdentityModel.Tokens;
 using Model;
 using System;
+using DAL.Helper;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using BLL.Interfaces;
+using DAL.Interfaces;
 
 namespace BLL
 {
@@ -68,4 +71,5 @@ namespace BLL
             return _res.Search(pageIndex, pageSize, out total, hoten, taikhoan);
         }
     }
+
 }
