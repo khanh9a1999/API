@@ -14,42 +14,78 @@ namespace API.Controllers
     [ApiController]
     public class LoaiSPController : ControllerBase
     {
-        private ILoaiSPBLL iloaispb;
-        public LoaiSPController(ILoaiSPBLL iloaispb2)
+        private ILoaiSPBLL _CategoryBusiness;
+        public LoaiSPController(ILoaiSPBLL CategoryBusiness)
         {
-            iloaispb = iloaispb2;
+            _CategoryBusiness = CategoryBusiness;
         }
         // GET: api/<LoaiController>
-        [Route("loaisp-all")]
+        [Route("get-category")]
         [HttpGet]
-        public IEnumerable<LoaiSP> Get()
+        public IEnumerable<LoaiSP> GetAllCategory()
         {
-            return iloaispb.getall();
+            return _CategoryBusiness.GetData();
         }
 
-        // GET api/<LoaiController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<LoaiSPController>
+        [Route("delete-category")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult DeleteCategory([FromBody] Dictionary<string, object> formData)
         {
+            string maloai = "";
+            if (formData.Keys.Contains("maloai") && !string.IsNullOrEmpty(Convert.ToString(formData["maloai"]))) { maloai = Convert.ToString(formData["maloai"]); }
+            _CategoryBusiness.Delete(maloai);
+            return Ok();
         }
 
-        // PUT api/<LoaiSPController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [Route("create-category")]
+        [HttpPost]
+        public LoaiSP CreateCategory([FromBody] LoaiSP model)
         {
+            model.maloai = Guid.NewGuid().ToString();
+            model.parent_maloai = "10";
+            _CategoryBusiness.Create(model);
+            return model;
         }
 
-        // DELETE api/<LoaiSPController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Route("update-category")]
+        [HttpPost]
+        public LoaiSP UpdateCategory([FromBody] LoaiSP model)
         {
+
+            _CategoryBusiness.Update(model);
+            return model;
+        }
+
+        [Route("get-by-id/{id}")]
+        [HttpGet]
+        public LoaiSP GetDatabyID(string id)
+        {
+            return _CategoryBusiness.GetDatabyID(id);
+        }
+
+        [Route("search-category")]
+        [HttpPost]
+        public ResponseModel Search([FromBody] Dictionary<string, object> formData)
+        {
+            var response = new ResponseModel();
+            try
+            {
+                var page = int.Parse(formData["page"].ToString());
+                var pageSize = int.Parse(formData["pageSize"].ToString());
+                string tenloai = "";
+                if (formData.Keys.Contains("tenloai") && !string.IsNullOrEmpty(Convert.ToString(formData["tenloai"]))) { tenloai = Convert.ToString(formData["tenloai"]); }
+                long total = 0;
+                var data = _CategoryBusiness.Search(page, pageSize, out total, tenloai);
+                response.TotalItems = total;
+                response.Data = data;
+                response.Page = page;
+                response.PageSize = pageSize;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return response;
         }
     }
 }

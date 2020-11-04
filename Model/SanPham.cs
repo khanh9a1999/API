@@ -6,14 +6,15 @@ namespace Model
 {
    public class SanPham
     {
-        public string MaSP { get; set; }
-        public string TenSP { get; set; }
-        public string XuatXu { get; set; }
-        public string MoTa { get; set; }
-        public int DonGia { get; set; }
-        public int SoLuong { get; set; }
-        public string Anh { get; set; }
-        public string MaLoai { get; set; }
-        public string MaThuongHieu { get; set; }
+        public int masp { get; set; }
+        public string tensp { get; set; }
+        public string xuatxu { get; set; }
+        public string mota { get; set; }
+        public decimal? dongia { get; set; }
+        public int soluong { get; set; }
+        public string anh { get; set; }
+        public string maloai { get; set; }
+        public string mathuonghieu { get; set; }
+        public long? total { get; set; }
     }
 }

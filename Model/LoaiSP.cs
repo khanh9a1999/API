@@ -6,7 +6,10 @@ namespace Model
 {
    public class LoaiSP
     {
-        public string MaLoai { get; set; }
-        public string TenLoai { get; set; }
+        public string parent_maloai { get; set; }
+        public string maloai { get; set; }
+        public string tenloai { get; set; }
+        public List<LoaiSP> children { get; set; }
+        public string type { get; set; }
     }
 }

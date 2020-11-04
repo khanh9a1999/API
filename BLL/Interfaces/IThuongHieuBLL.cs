@@ -5,8 +5,13 @@ using System.Text;
 
 namespace BLL.Interfaces
 {
-    public interface IThuongHieuBLL
+    public partial interface IThuongHieuBLL
     {
-        List<ThuongHieu> getall();
+        List<ThuongHieu> GetData();
+        ThuongHieu GetDatabyID(string id);
+        bool Create(ThuongHieu model);
+        bool Update(ThuongHieu model);
+        bool Delete(string id);
+        List<ThuongHieu> Search(int pageIndex, int pageSize, out long total, string tenthuonghieu);
     }
 }

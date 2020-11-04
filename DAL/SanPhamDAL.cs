@@ -10,7 +10,7 @@ namespace DAL
     public class SanPhamDAL : ISanPhamDAL
     {
 
-        public IDatabaseHelper _dbHelper;
+        private IDatabaseHelper _dbHelper;
         public SanPhamDAL(IDatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper;
@@ -21,17 +21,15 @@ namespace DAL
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_create",
-                "@MaSP", model.MaSP,
-                "@MaLoai", model.MaLoai,
-                "@MaThuongHieu", model.MaThuongHieu,
-                "@TenSP", model.TenSP,
-                "@XuatXu", model.XuatXu,
-                "@MoTa", model.MoTa,
-                "@DonGia", model.DonGia,
-                "@SoLuong", model.SoLuong,
-                "@Anh", model.Anh
-                );
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_product_create",
+                "@maloai", model.maloai,
+                "@mathuonghieu", model.mathuonghieu,
+                "@tensp ", model.tensp,
+                "@xuatxu ", model.xuatxu,
+                "@mota", model.mota,
+                "@dongia", model.dongia,
+                "@soluong", model.soluong,
+                "@anh", model.anh);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
@@ -43,7 +41,6 @@ namespace DAL
                 throw ex;
             }
         }
-        
 
         public bool Delete(string id)
         {
@@ -51,7 +48,7 @@ namespace DAL
             try
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_product_delete",
-                "@MaSP", id);
+                "@masp", id);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
@@ -63,26 +60,49 @@ namespace DAL
                 throw ex;
             }
         }
+
         public bool Update(SanPham model)
         {
             string msgError = "";
             try
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_product_update",
-                "@MaSP", model.MaSP,
-                "@MaLoai", model.MaLoai,
-                "@MaThuongHieu", model.MaThuongHieu,
-                "@TenSP", model.TenSP,
-                "@XuatXu", model.XuatXu,
-                "@MoTa", model.MoTa,
-                "@DonGia", model.DonGia,
-                "@SoLuong", model.SoLuong,
-                "@Anh", model.Anh);
+                "@masp", model.masp,
+                "@maloai", model.maloai,
+                "@mathuonghieu", model.mathuonghieu,
+                "@tensp ", model.tensp,
+                "@xuatxu ", model.xuatxu,
+                "@mota", model.mota,
+                "@dongia", model.dongia,
+                "@soluong", model.soluong,
+                "@anh", model.anh);
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result) + msgError);
                 }
                 return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<SanPham> Search(int pageIndex, int pageSize, out long total, string tensp, decimal dongia)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_product_search",
+                    "@page_index", pageIndex,
+                    "@page_size", pageSize,
+                    "@tensp", tensp,
+                    "@dongia", dongia);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPham>().ToList();
             }
             catch (Exception ex)
             {
@@ -95,8 +115,8 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_by_id",
-                     "@MaSP", id);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_product_get_by_id",
+                     "@masp", id);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<SanPham>().FirstOrDefault();
@@ -106,68 +126,13 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<SanPham> GetDataAll()
+        public List<SanPham> GetDataAll(int page_index, int page_size, out long total)
         {
-            string msgError = "";
-            try
-            {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_all");
-                if (!string.IsNullOrEmpty(msgError))
-                    throw new Exception(msgError);
-                return dt.ConvertTo<SanPham>().ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public List<SanPham> Search(int pageIndex, int pageSize, out long total, string MaLoai)
-        {
-            string msgError = "";
             total = 0;
-            try
-            {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_search",
-                    "@page_index", pageIndex,
-                    "@page_size", pageSize,
-                    "@MaLoai", MaLoai);
-                if (!string.IsNullOrEmpty(msgError))
-                    throw new Exception(msgError);
-                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
-                return dt.ConvertTo<SanPham>().ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public List<SanPham> GetDataByLoai(string MaLoai)
-        {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_get_by_loai",
-                     "@MaLoai", MaLoai);
-                if (!string.IsNullOrEmpty(msgError))
-                    throw new Exception(msgError);
-                return dt.ConvertTo<SanPham>().ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public List<SanPham> TK(int pageIndex, int pageSize, out long total, string TenSP, decimal DonGia)
-        {
-            string msgError = "";
-            total = 0;
-            try
-            {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_product_tk",
-                    "@page_index", pageIndex,
-                    "@page_size", pageSize,
-                    "@TenSP", TenSP,
-                    "@DonGia", DonGia);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_product_all", "@page_index", page_index, "@page_size", page_size);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
@@ -179,6 +144,61 @@ namespace DAL
             }
         }
 
+        public List<SanPham> GetDataNew()
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_product_new");
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<SanPham>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<SanPham> SearchCategory(int pageIndex, int pageSize, out long total, string maloai)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_product_get_by_category",
+                    "@page_index", pageIndex,
+                    "@page_size", pageSize,
+                    "@maloai", maloai);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPham>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<SanPham> SearchBrand(int pageIndex, int pageSize, out long total, string mathuonghieu)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_product_by_brand",
+                    "@page_index", pageIndex,
+                    "@page_size", pageSize,
+                    "@mathuonghieu", mathuonghieu);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPham>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
 

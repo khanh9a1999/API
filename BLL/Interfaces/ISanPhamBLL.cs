@@ -8,12 +8,15 @@ namespace BLL.Interfaces
     public partial interface ISanPhamBLL
     {
         bool Create(SanPham model);
-        SanPham GetDatabyID(string id);
-        List<SanPham> GetDataAll();
-        List<SanPham> GetDataByLoai(string id);
-        List<SanPham> Search(int pageIndex, int pageSize, out long total, string MaLoai);
         bool Update(SanPham model);
         bool Delete(string id);
-        List<SanPham> TK(int pageIndex, int pageSize, out long total, string TenSP, decimal DonGia);
+        List<SanPham> Search(int pageIndex, int pageSize, out long total, string tensp, decimal dongia);
+        SanPham GetDatabyID(string id);
+        List<SanPham> GetDataAll(int page_index, int page_size, out long total);
+
+        List<SanPham> GetDataNew();
+        List<SanPham> SearchCategory(int pageIndex, int pageSize, out long total, string maloai);
+        List<SanPham> SearchBrand(int pageIndex, int pageSize, out long total, string mathuonghieu);
+
     }
 }

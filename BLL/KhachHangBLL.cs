@@ -9,14 +9,32 @@ namespace BLL
 {
    public class KhachHangBLL:IKhachHangBLL
     {
-        private IKhachHangDAL ikhachhang;
+        private IKhachHangDAL _res;
         public KhachHangBLL (IKhachHangDAL ikhachhang2)
         {
-            ikhachhang = ikhachhang2;
+            _res = ikhachhang2;
         }
-        public bool Create(KhachHang model)
+        public bool CreateCustomer(KhachHang model)
         {
-            return ikhachhang.Create(model);
+            return _res.CreateCustomer(model);
+        }
+
+        public bool Delete(string id)
+        {
+            return _res.Delete(id);
+        }
+        public KhachHang GetDatabyID(string id)
+        {
+            return _res.GetDatabyID(id);
+        }
+        public bool Update(KhachHang model)
+        {
+            return _res.Update(model);
+        }
+        public List<KhachHang> Search(int pageIndex, int pageSize, out long total, string tenkh, string email)
+        {
+            return _res.Search(pageIndex, pageSize, out total, tenkh, email);
         }
     }
+
 }
