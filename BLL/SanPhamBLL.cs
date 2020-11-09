@@ -30,7 +30,7 @@ namespace BLL
         {
             return _res.Search(pageIndex, pageSize, out total, tensp, dongia);
         }
-        public SanPham GetDatabyID(string id)
+        public SanPham GetDatabyID(int id)
         {
             return _res.GetDatabyID(id);
         }

@@ -11,7 +11,7 @@ namespace BLL.Interfaces
         bool Update(SanPham model);
         bool Delete(string id);
         List<SanPham> Search(int pageIndex, int pageSize, out long total, string tensp, decimal dongia);
-        SanPham GetDatabyID(string id);
+        SanPham GetDatabyID(int id);
         List<SanPham> GetDataAll(int page_index, int page_size, out long total);
 
         List<SanPham> GetDataNew();

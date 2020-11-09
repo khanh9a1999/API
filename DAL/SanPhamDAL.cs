@@ -22,6 +22,7 @@ namespace DAL
             try
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_product_create",
+                "@masp",model.masp,
                 "@maloai", model.maloai,
                 "@mathuonghieu", model.mathuonghieu,
                 "@tensp ", model.tensp,
@@ -110,7 +111,7 @@ namespace DAL
             }
         }
 
-        public SanPham GetDatabyID(string id)
+        public SanPham GetDatabyID(int id)
         {
             string msgError = "";
             try

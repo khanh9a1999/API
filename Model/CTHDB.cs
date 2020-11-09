@@ -9,6 +9,8 @@ namespace Model
 		public string ma_chi_tiet { get; set; }
 		public string ma_hoa_don { get; set; }
 		public int masp { get; set; }
+		public decimal? dongia { get; set; }
+		public string tensp { get; set; }
 		public int so_luong { get; set; }
 	}
 }

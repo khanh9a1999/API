@@ -100,7 +100,7 @@ namespace API.Controllers
 
         [Route("get-by-id/{id}")]
         [HttpGet]
-        public SanPham GetDatabyID(string id)
+        public SanPham GetDatabyID(int id)
         {
             return _productBusiness.GetDatabyID(id);
         }
