@@ -6,11 +6,12 @@ namespace Model
 {
     public class KhachHang
     {
-        public int makh { get; set; }
+        public string makh { get; set; }
         public string tenkh { get; set; }
         public string diachi { get; set; }
         public string sdt { get; set; }
         public string email { get; set; }
         public string pw { get; set; }
+        public string token { get; set; }
     }
 }

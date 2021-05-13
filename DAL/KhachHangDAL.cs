@@ -22,6 +22,7 @@ namespace DAL
             try
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_customer_create",
+                    "@makh",model.makh,
                 "@tenkh", model.tenkh,
                 "@diachi", model.diachi,
                 "@sdt", model.sdt,
@@ -39,6 +40,23 @@ namespace DAL
             }
         }
 
+        public KhachHang GetKH(string username, string password)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_kh_get_by_username_password",
+                     "@email", username,
+                     "@pw", password);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<KhachHang>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public bool Delete(string id)
         {
             string msgError = "";

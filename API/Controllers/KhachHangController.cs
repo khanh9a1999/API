@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
+using BLL;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,15 +20,30 @@ namespace API.Controllers
     public class KhachHangController : ControllerBase
     {
         private IKhachHangBLL _customerBusiness;
-        public KhachHangController(IKhachHangBLL customerBusiness)
+        private string _path;
+        public KhachHangController(IKhachHangBLL customerBusiness, IConfiguration configuration)
         {
             _customerBusiness = customerBusiness;
+            _path = configuration["AppSettings:PATH"];
+        }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody] Authenticate model)
+        {
+            var kh = _customerBusiness.Authenticate(model.Username, model.Password);
+
+            if (kh == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            return Ok(kh);
         }
 
         [Route("create-customer")]
         [HttpPost]
         public KhachHang CreateCustomer([FromBody] KhachHang model)
         {
+            model.makh = Guid.NewGuid().ToString();
             _customerBusiness.CreateCustomer(model);
             return model;
         }

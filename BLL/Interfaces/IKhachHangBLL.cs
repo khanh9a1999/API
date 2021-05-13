@@ -7,6 +7,7 @@ namespace BLL.Interfaces
 {
     public partial interface IKhachHangBLL
     {
+        KhachHang Authenticate(string username, string password);
         bool CreateCustomer(KhachHang model);
         KhachHang GetDatabyID(string id);
         bool Update(KhachHang model);

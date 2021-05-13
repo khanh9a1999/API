@@ -7,6 +7,7 @@ namespace DAL.Interfaces
 {
     public partial interface IKhachHangDAL
     {
+        KhachHang GetKH(string username, string password);
         bool CreateCustomer(KhachHang model);
         KhachHang GetDatabyID(string id);
         bool Update(KhachHang model);
